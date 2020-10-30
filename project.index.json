@@ -1,0 +1,9 @@
+{
+	"name" : "OneStop Dashboard",
+	"description" : "E-Learning Platform for codeathon with Shreya Jain",
+	"created" : "19/11/2020",
+	"completed" : "true",
+	"modules" : ["ing required modules", "csv", "datetime,os", "uuid", "requests", "Session", "app_config", "Mail, Message", "make_response", "wraps, update_wrapper", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "shutil", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g, session", "g,session", "listdir", "os", "g,session", "uuid"],
+	"hosting" : {"hosted" : "false"},
+	"code" : "ON-19112020-205006"
+}

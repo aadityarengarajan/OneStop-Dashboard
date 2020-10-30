@@ -1,0 +1,142 @@
+<meta charset="UTF-8">
+<link rel='icon' href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/ >
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="cleartype" content="on" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="false" />
+<link rel="shortcut icon" href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/>
+<meta name="description" content="OneStop Dashboard" />
+<meta name="viewport" content="width=device-width, initial-scale=0.7" />
+<meta property="og:site_name" content="OneStop Dashboard" />
+<meta property="og:title" content="OneStop Dashboard" />
+<meta property="og:image:url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+<meta property="og:image:secure_url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="600" />
+<meta itemprop="name" content="OneStop Dashboard" />
+<meta name="twitter:title" content="OneStop Dashboard">
+<meta name="twitter:description" content="OneStop Dashboard">
+<meta name="twitter:image" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png">
+<meta name="twitter:image:alt" content="OneStop Dashboard">
+<meta name="twitter:card" content="summary_large_image">
+<header>
+   <title>OneStop | Physics</title>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,100;1,300&display=swap" rel="stylesheet">
+   <style>
+      p {
+      font-family: 'Roboto', sans-serif;
+      }
+      h1,h2,h3{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 900;
+      }
+      table,label {
+      font-family: 'Roboto', sans-serif;
+      }
+   </style>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,100;1,300&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/userstyle.css') }}" type="text/css">
+   <script src="{{ url_for('static', filename='javascript/user.js') }}"></script>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   <script>
+      $(document).ready( function () {
+      var table = $('#example').DataTable( {
+      columnDefs: [
+      {
+      targets: 0,
+      render: function (data, type, row, meta)
+      {
+       if (type === 'display')
+       {
+           data = '<a style="color:black;text-color:black;text-decoration:inherit;" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">View</a>';
+       }
+       return data;
+      }
+      }],
+      });
+      
+      
+      $('#example').DataTable();
+      } );
+      
+       
+   </script>
+   <div class="logo">One<span>Stop</span></div>
+</header>
+<div class="nav-btn">Menu</div>
+<div class="container">
+   <div class="sidebar">
+      <nav>
+         <a href="#">One<span>Stop</span></a>
+         <ul>
+            <li><a href="/inbox">Dashboard</a></li>
+            <ul class="collapsible" data-collapsible="accordion">
+               <li id="dash_subject">
+                  <div id="dash_subject_header" class="collapsible-header waves-effect"><font color="white">Subject</font></div>
+                  <div id="dash_subject_body" class="collapsible-body">
+                     <ul>
+                        <li id="subject_chemistry" {% if subject[0]=='Physics' %} class="active" {% endif %}>
+                        <a class="waves-effect" style="text-decoration: none;" href="/{{subject[0]}}">{{subject[0]}}</a>
+                        </li>
+                        <li id="subject_computer" {% if subject[1]=='Physics' %} class="active" {% endif %}>
+                        <a class="waves-effect" style="text-decoration: none;" href="/{{subject[1]}}">{{subject[1]}}</a>
+                        </li>
+                        <li id="subject_english" {% if subject[2]=='Physics' %} class="active" {% endif %}>
+                        <a class="waves-effect" style="text-decoration: none;" href="/{{subject[2]}}">{{subject[2]}}</a>
+                        </li>
+                        <li id="subject_mathematics" {% if subject[3]=='Physics' %} class="active" {% endif %}>
+                        <a class="waves-effect" style="text-decoration: none;" href="/{{subject[3]}}">{{subject[3]}}</a>
+                        </li>
+                        <li id="subject_physics" {% if subject[4]=='Physics' %} class="active" {% endif %}>
+                        <a class="waves-effect" style="text-decoration: none;" href="/{{subject[4]}}">{{subject[4]}}</a>
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
+            <li><a href="/pastboardpapers">Past Board Papers</a></li>
+            <li><a href="/pastschoolpapers">School Papers</a></li>
+         </ul>
+      </nav>
+   </div>
+   <div class="main-content">
+      <h1>OneStop | Physics </h1>
+      <p>{{greeting}}</p>
+      <div class="panel-wrapper">
+         <div class="panel-head">
+            Physics
+         </div>
+         <div class="panel-body">
+            <table id="example" class="display nowrap" style="width:100%">
+               <thead>
+                  <tr>
+                     <th>Attachment</th>
+                     <th>Class</th>
+                     <th align="right">Title</th>
+                     <th align="right">Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for i in boardpapers %}
+                  {% if i['subject'].capitalize()=='Physics' %}
+                  <tr>
+                     <a href="{{i['attachment']}}">
+                        <td>View</td>
+                     </a>
+                     <td>{{i['class']}}</td>
+                     <td>{{i['title']}}</td>
+                     <td>{{i['description']}}</td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+</html>

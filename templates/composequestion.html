@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" >
+   <head>
+      <meta charset="UTF-8">
+      <link rel='icon' href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/ >
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="cleartype" content="on" />
+      <meta name="MobileOptimized" content="width" />
+      <meta name="HandheldFriendly" content="false" />
+      <link rel="shortcut icon" href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/>
+      <meta name="description" content="OneStop Dashboard" />
+      <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+      <meta property="og:site_name" content="OneStop Dashboard" />
+      <meta property="og:title" content="OneStop Dashboard" />
+      <meta property="og:image:url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+      <meta property="og:image:secure_url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="600" />
+      <meta itemprop="name" content="OneStop Dashboard" />
+      <meta name="twitter:title" content="OneStop Dashboard">
+      <meta name="twitter:description" content="OneStop Dashboard">
+      <meta name="twitter:image" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png">
+      <meta name="twitter:image:alt" content="OneStop Dashboard">
+      <meta name="twitter:card" content="summary_large_image">
+      <title>OneStop | Post a question</title>
+      <link rel='stylesheet' href='https://unpkg.com/react-quill@1.0.0/dist/quill.core.css'>
+      <link rel='stylesheet' href='https://unpkg.com/react-quill@1.0.0/dist/quill.snow.css'>
+      <style>
+         body {
+         background: #f3f1f2;
+         background-image:url('https://wallpaperaccess.com/full/3405919.jpg');
+         font-family: sans-serif;
+         }
+         .center {
+         margin: auto;
+         width: 50%;
+         border: 3px solid blue;
+         padding: 10px;
+         }
+         input[type=text] {
+         padding: 12px 20px;
+         margin: 8px 0;
+         box-sizing: border-box;
+         }
+         input[type=text]:focus {
+         border: 3px solid #555;
+         }
+         input[type=text] {
+         transition: width 0.4s ease-in-out;
+         }
+         input[type=text]:focus {
+         width: 100%;
+         }
+         .app {
+         margin: 1rem 4rem;
+         }
+         .app .ql-container {
+         border-bottom-left-radius: 0.5em;
+         border-bottom-right-radius: 0.5em;
+         background: #fefcfc;
+         }
+         .app .ql-editor {
+         min-height: 18em;
+         }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $("#theform").on("submit", function () {
+           var hvalue = $('.ql-editor').html();
+           $(this).append("<textarea name='content' style='display:none'>"+hvalue+"</textarea>");
+          });
+         });
+      </script>
+   </head>
+   <body>
+      <form class="center" action="/forum/question" method="POST" id="theform">
+         Tags<br><input type="text" name="tags"><br>
+         Subject<br><input type="text" name="subject"><br><br>
+         <div class="app"></div>
+         <button action="submit" style="cursor:pointer;color:white;padding: 10px;border: none;background-color: blue;">Post</button>
+      </form>
+      <script src='https://unpkg.com/react@latest/umd/react.development.js'></script>
+      <script src='https://unpkg.com/react-dom@latest/umd/react-dom.development.js'></script>
+      <script src='https://unpkg.com/prop-types/prop-types.js'></script>
+      <script src='https://unpkg.com/react-quill@latest/dist/react-quill.js'></script>
+      <script>
+         class Editor extends React.Component {
+           constructor(props) {
+             super(props);
+             this.state = { editorHtml: '', theme: 'snow' };
+             this.handleChange = this.handleChange.bind(this);
+           }
+         
+           handleChange(html) {
+             this.setState({ editorHtml: html });
+           }
+         
+           handleThemeChange(newTheme) {
+             if (newTheme === "core") newTheme = null;
+             this.setState({ theme: newTheme });
+           }
+         
+           render() {
+             return (
+               React.createElement("div", null,
+               React.createElement(ReactQuill, {
+                 theme: this.state.theme,
+                 onChange: this.handleChange,
+                 value: this.state.editorHtml,
+                 modules: Editor.modules,
+                 formats: Editor.formats,
+                 bounds: '.app',
+                 placeholder: this.props.placeholder }),
+         
+               React.createElement("div", { className: "themeSwitcher" },
+         )));
+         
+           }}
+         Editor.modules = {
+           toolbar: [
+           [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+           [{ size: [] }],
+           ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+           [{ 'list': 'ordered' }, { 'list': 'bullet' },
+           { 'indent': '-1' }, { 'indent': '+1' }],
+           ['link', 'image', 'video'],
+           ['clean']],
+         
+           clipboard: {
+             matchVisual: false } };
+         Editor.formats = [
+         'header', 'font', 'size',
+         'bold', 'italic', 'underline', 'strike', 'blockquote',
+         'list', 'bullet', 'indent',
+         'link', 'image', 'video'];
+         Editor.propTypes = {
+           placeholder: PropTypes.string };
+         ReactDOM.render(
+         React.createElement(Editor, { placeholder: 'Write something...' }),
+         document.querySelector('.app'));
+      </script>
+   </body>
+</html>

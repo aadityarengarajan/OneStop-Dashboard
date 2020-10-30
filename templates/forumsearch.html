@@ -1,0 +1,164 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <link rel='icon' href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/ >
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="cleartype" content="on" />
+      <meta name="MobileOptimized" content="width" />
+      <meta name="HandheldFriendly" content="false" />
+      <link rel="shortcut icon" href='https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png' type='image/png'/>
+      <meta name="description" content="OneStop Dashboard" />
+      <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+      <meta property="og:site_name" content="OneStop Dashboard" />
+      <meta property="og:title" content="OneStop Dashboard" />
+      <meta property="og:image:url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+      <meta property="og:image:secure_url" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="600" />
+      <meta itemprop="name" content="OneStop Dashboard" />
+      <meta name="twitter:title" content="OneStop Dashboard">
+      <meta name="twitter:description" content="OneStop Dashboard">
+      <meta name="twitter:image" content="https://www.inventicons.com/uploads/iconset/352/wm/512/online-course-44.png">
+      <meta name="twitter:image:alt" content="OneStop Dashboard">
+      <meta name="twitter:card" content="summary_large_image">
+      <title>OneStop | Forums</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/userstyle.css') }}" type="text/css">
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+      <script src="https://cdn.jsdelivr.net/gh/mholt/papaparse/papaparse.min.js"></script>
+      <script src="javascript/signoutbutton.js"></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
+   </head>
+   <body>
+      <div class="nav-btn">Menu</div>
+      <div class="container">
+      <div class="sidebar">
+         <nav>
+            <a>One<span>Stop</span><br>Forums</a>
+            <ul>
+               <li class="active"><a>{{name}}</a></li>
+               <li><a href="/dashboard">Back to Resources</a></li>
+            </ul>
+         </nav>
+      </div>
+      <div class="main-content">
+      <h1>OneStop | Forums</h1>
+      <div class="panel-wrapper">
+         <div class="panel-head">
+            Search for a question
+         </div>
+         <style>
+            #paper {
+            color:#FFF;
+            font-size:20px;
+            }
+            #margin {
+            margin-left:12px;
+            margin-bottom:20px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none; 
+            }
+            #text {
+            width:500px;
+            overflow:hidden;
+            background-color:#FFF;
+            color:#222;
+            font-family:Courier, monospace;
+            font-weight:normal;
+            font-size:24px;
+            resize:none;
+            line-height:40px;
+            padding-left:100px;
+            padding-right:100px;
+            padding-top:45px;
+            padding-bottom:34px;
+            background-image:url(https://static.tumblr.com/maopbtg/E9Bmgtoht/lines.png), url(https://static.tumblr.com/maopbtg/nBUmgtogx/paper.png);
+            background-repeat:repeat-y, repeat;
+            -webkit-border-radius:12px;
+            border-radius:12px;
+            -webkit-box-shadow: 0px 2px 14px #000;
+            box-shadow: 0px 2px 14px #000;
+            border-top:1px solid #FFF;
+            border-bottom:1px solid #FFF;
+            }
+            #title {
+            background-color:transparent;
+            border-bottom:3px solid #FFF;
+            color:#FFF;
+            font-size:20px;
+            font-family:Courier, monospace;
+            height:28px;
+            font-weight:bold;
+            width:220px;
+            }
+            #button {
+            cursor:pointer;
+            margin-top:20px;
+            float:right;
+            height:40px;
+            padding-left:24px;
+            padding-right:24px;
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight:bold;
+            font-size:20px;
+            color:#FFF;
+            text-shadow: 0px -1px 0px #000000;
+            -webkit-border-radius:8px;
+            border-radius:8px;
+            border-top:1px solid #FFF;
+            -webkit-box-shadow: 0px 2px 14px #000;
+            box-shadow: 0px 2px 14px #000;
+            background-color: #62add6;
+            background-image:url(https://static.tumblr.com/maopbtg/ZHLmgtok7/button.png);
+            background-repeat:repeat-x;
+            }
+            #wrapper {
+            width:700px;
+            height:auto;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:24px;
+            margin-bottom:100px;
+            }
+         </style>
+         <div id="wrapper">
+            <textarea placeholder="Enter the question to search." id="text" class="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; width: 100%; "></textarea>  
+            <br>
+         </div>
+         <br>
+      </div>
+      <div class="panel-wrapper" style="padding-right:24px;padding-left:24px;">
+         <div class="panel-head">RESULTS</div>
+         <div id="place_for_suggestions"></div>
+         <br>
+      </div>
+      <br><br>
+      <script>
+         $(".text").keyup(function(){
+             var text = $(this).val();
+         
+             $.ajax({
+               url: "/forum/dynamicsearch",
+               type: "get",
+               data: {jsdata: text},
+               success: function(response) {
+                 $("#place_for_suggestions").html(response);
+               },
+               error: function(xhr) {
+               }
+             });
+         });
+      </script>
+      <div class="panel-wrapper" style="padding-right:24px;padding-left:24px;">
+         <div class="panel-head">QUESTION NOT HERE? ASK YOUR QUESTION!</div>
+         <a href="/forum">
+            <h1 style="color:black;">Ask your unique question</h1>
+         </a>
+         <br>
+      </div>
+   </body>
+</html>
